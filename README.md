@@ -1,7 +1,10 @@
 # HardwareInterface
 Interface for many sensors and other things I used when playing around.  
 对我用过的传感器等硬件的接口。  
-  
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7f7ed1a49d654ac79a5d2cbdcfd2cd07)](https://www.codacy.com/gh/MicrostormSoft/HardwareInterface/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MicrostormSoft/HardwareInterface&amp;utm_campaign=Badge_Grade)
+[![NuGet version (PidSharp)](https://img.shields.io/nuget/v/HardwareInterface.svg?style=flat)](https://www.nuget.org/packages/HardwareInterface/)
+
 ## What is this 是什么
 When I am playing with some piece of hardware and developing in CSharp, I'd rather write the 'drivers' for them first and then use the 'drivers' to achieve functions. This repo is what I use.  
 
