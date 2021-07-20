@@ -21,9 +21,9 @@ namespace HardwareInterface.Motor
         private SerialPortManager _serialPortManager;
 
         /// <summary>
-        /// 串口调速电机驱动程序
+        /// 串口调速电机驱动程序  Driver for uart speed-controed motor
         /// </summary>
-        /// <param name="Port"></param>
+        /// <param name="Port">串口设备 UART device</param>
         public UARTMotorChain(string Port)
         {
             _serialPortManager = new SerialPortManager();
@@ -54,10 +54,10 @@ namespace HardwareInterface.Motor
         }
 
         /// <summary>
-        /// 更改电机的ID
+        /// 更改电机的ID  Modify motor id
         /// </summary>
-        /// <param name="oldID">原ID，0选择所有电机</param>
-        /// <param name="newID">新ID，不可为0</param>
+        /// <param name="oldID">原ID，0选择所有电机  Original ID, 0 for all motors</param>
+        /// <param name="newID">新ID，不可为0  New ID,do not use 0</param>
         public void ChangeMotorId(byte oldID, byte newID)
         {
             byte[] buf = new byte[10];
@@ -75,10 +75,10 @@ namespace HardwareInterface.Motor
         }
 
         /// <summary>
-        /// 顺时针(编码器端)转动电机
+        /// 顺时针(编码器端)转动电机 Turn the motor clockwise
         /// </summary>
-        /// <param name="id">电机ID</param>
-        /// <param name="rpm">转速</param>
+        /// <param name="id">电机ID  Motor ID</param>
+        /// <param name="rpm">转速  Rotation speed</param>
         public void MotorRunS(byte id, ushort rpm)
         {
             byte[] buf = new byte[10];
@@ -96,10 +96,10 @@ namespace HardwareInterface.Motor
         }
 
         /// <summary>
-        /// 逆时针(编码器端)转动电机
+        /// 逆时针(编码器端)转动电机  Turn the motor anti-clockwise
         /// </summary>
-        /// <param name="id">电机ID</param>
-        /// <param name="rpm">转速</param>
+        /// <param name="id">电机ID  Motor ID</param>
+        /// <param name="rpm">转速  Rotation speed</param>
         public void MotorRunN(byte id, ushort rpm)
         {
             byte[] buf = new byte[10];
@@ -117,7 +117,7 @@ namespace HardwareInterface.Motor
         }
 
         /// <summary>
-        /// 停止所有电机
+        /// 停止所有电机  Stop all the motors
         /// </summary>
         public void StopAll()
         {
@@ -126,7 +126,7 @@ namespace HardwareInterface.Motor
         }
 
         /// <summary>
-        /// 初始化设备
+        /// 初始化设备  Init the deivce
         /// </summary>
         public void Init()
         {
@@ -134,7 +134,7 @@ namespace HardwareInterface.Motor
         }
 
         /// <summary>
-        /// 关闭设备
+        /// 关闭设备  Disconnect the device
         /// </summary>
         public void Abort()
         {

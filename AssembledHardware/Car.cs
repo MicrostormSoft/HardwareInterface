@@ -22,7 +22,7 @@ namespace HardwareInterface.AssembledHardware
         UARTMotorChain motors;
 
         /// <summary>
-        /// 当前设定转速
+        /// 当前设定转速 Current rotation speed
         /// </summary>
         public ushort CurrentTurnRate { private set; get; }
 
@@ -31,8 +31,9 @@ namespace HardwareInterface.AssembledHardware
         public enum TurnDirection { Left, Right };
 
         /// <summary>
-        /// 小车底盘系统
+        /// 小车底盘系统  The car
         /// <para>包含：两个串口磁编码电机，一个总线转向舵机</para>
+        /// <para>Includes 2 uart motor and a uart servo for turning</para>
         /// </summary>
         public Car()
         {
@@ -60,9 +61,9 @@ namespace HardwareInterface.AssembledHardware
         }
 
         /// <summary>
-        /// 定速前进
+        /// 定速前进  Go forward at a certain speed
         /// </summary>
-        /// <param name="speed">速度(cm/s)</param>
+        /// <param name="speed">速度 Speed (cm/s)</param>
         public void GoForward(double speed)
         {
             dservo.SetAngle(0, CenterOffset);
@@ -72,9 +73,9 @@ namespace HardwareInterface.AssembledHardware
         }
 
         /// <summary>
-        /// 定速后退
+        /// 定速后退 Go backward at a certain speed
         /// </summary>
-        /// <param name="speed">速度(cm/s)</param>
+        /// <param name="speed">速度 Speed (cm/s)</param>
         public void GoBackward(double speed)
         {
             dservo.SetAngle(0, CenterOffset);
@@ -84,7 +85,7 @@ namespace HardwareInterface.AssembledHardware
         }
 
         /// <summary>
-        /// 原地停下
+        /// 原地停下 Break
         /// </summary>
         public void Stop()
         {
@@ -93,10 +94,10 @@ namespace HardwareInterface.AssembledHardware
         }
 
         /// <summary>
-        /// 保持当前速率定速转弯
+        /// 保持当前速率定速转弯 Turn at current speed
         /// </summary>
-        /// <param name="dir">转弯方向</param>
-        /// <param name="angle">转动角度</param>
+        /// <param name="dir">转弯方向 Which direction to turn to</param>
+        /// <param name="angle">转动角度 The angle to turn</param>
         public void Turn(TurnDirection dir, double angle)
         {
             var ts = GetTurnSpeed(dir, angle, CurrentTurnRate);
