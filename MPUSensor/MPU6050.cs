@@ -22,7 +22,10 @@ namespace HardwareInterface.MPUSensor
         private const byte FIFO_COUNT = 0x72;
         private const byte FIFO_R_W = 0x74;
 
+        private const double GyRate = 360d / 65535d;
+
         private double accrate = 0;
+        private int accoffset = 0;
 
         I2cDevice device;
 
@@ -51,15 +54,19 @@ namespace HardwareInterface.MPUSensor
             {
                 case MesureRange.MP2g:
                     accrate = 2d / 65535d;
+                    accoffset = 2;
                     break;
                 case MesureRange.MP4g:
                     accrate = 4d / 65535d;
+                    accoffset = 4;
                     break;
                 case MesureRange.MP8g:
                     accrate = 8d / 65535d;
+                    accoffset = 8;
                     break;
                 case MesureRange.MP16g:
                     accrate = 16d / 65535d;
+                    accoffset = 16;
                     break;
             }
         }
@@ -68,9 +75,9 @@ namespace HardwareInterface.MPUSensor
         {
             return new Vect3Result
             {
-                X = ReadWord(0x3B) * accrate,//3B 3C
-                Y = ReadWord(0x3D) * accrate,//3D 3E
-                Z = ReadWord(0x3F) * accrate //3F 40
+                X = ReadWord(0x3B) * accrate - accoffset,//3B 3C
+                Y = ReadWord(0x3D) * accrate - accoffset,//3D 3E
+                Z = ReadWord(0x3F) * accrate - accoffset //3F 40
             };
         }
 
@@ -78,9 +85,9 @@ namespace HardwareInterface.MPUSensor
         {
             return new Vect3Result
             {
-                X = ReadWord(0x43),//43 44
-                Y = ReadWord(0x45),//45 46
-                Z = ReadWord(0x47) //47 48
+                X = ReadWord(0x43) * GyRate - 180,//43 44
+                Y = ReadWord(0x45) * GyRate - 180,//45 46
+                Z = ReadWord(0x47) * GyRate - 180 //47 48
             };
         }
 
