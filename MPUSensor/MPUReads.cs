@@ -11,8 +11,13 @@ namespace HardwareInterface.MPUSensor
         public double X, Y, Z;
     }
 
-    public enum MesureRange
+    public enum AccRange
     {
         MP2g = 0x00, MP4g = 0x01, MP8g = 0x02, MP16g = 0x03
+    }
+
+    public enum GyoRange
+    {
+        MP250dps = 0x00, MP500dps = 0x01, MP1000dps = 0x02, MP2000dps = 0x03
     }
 }

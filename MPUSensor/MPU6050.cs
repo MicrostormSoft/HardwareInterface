@@ -25,7 +25,9 @@ namespace HardwareInterface.MPUSensor
         private const double GyRate = 360d / 65535d;
 
         private double accrate = 0;
+        private double gyorate = 0;
         private int accoffset = 0;
+        private int gyooffset = 0;
 
         I2cDevice device;
 
@@ -42,31 +44,51 @@ namespace HardwareInterface.MPUSensor
 
         public void Init()
         {
-            Init(MesureRange.MP2g);
+            Init(AccRange.MP2g,GyoRange.MP250dps);
         }
 
-        public void Init(MesureRange acc_range)
+        public void Init(AccRange acc_range,GyoRange gyo_range)
         {
             WriteByte(PWR_MGMT_1, 0x01);
             Task.Delay(100).Wait();
             WriteByte(ACCEL_CONFIG, (byte)acc_range);
             switch (acc_range)
             {
-                case MesureRange.MP2g:
-                    accrate = 2d / 65535d;
+                case AccRange.MP2g:
+                    accrate = 4d / 65535d;
                     accoffset = 2;
                     break;
-                case MesureRange.MP4g:
-                    accrate = 4d / 65535d;
+                case AccRange.MP4g:
+                    accrate = 8d / 65535d;
                     accoffset = 4;
                     break;
-                case MesureRange.MP8g:
-                    accrate = 8d / 65535d;
+                case AccRange.MP8g:
+                    accrate = 16d / 65535d;
                     accoffset = 8;
                     break;
-                case MesureRange.MP16g:
-                    accrate = 16d / 65535d;
+                case AccRange.MP16g:
+                    accrate = 32d / 65535d;
                     accoffset = 16;
+                    break;
+            }
+
+            switch (gyo_range)
+            {
+                case GyoRange.MP250dps:
+                    gyorate = 500d / 65535d;
+                    gyooffset = 250;
+                    break;
+                case GyoRange.MP500dps:
+                    gyorate = 1000d / 65535d;
+                    gyooffset = 500;
+                    break;
+                case GyoRange.MP1000dps:
+                    gyorate = 2000d / 65535d;
+                    gyooffset = 1000;
+                    break;
+                case GyoRange.MP2000dps:
+                    gyorate = 4000d / 65535d;
+                    gyooffset = 2000;
                     break;
             }
         }
@@ -85,9 +107,9 @@ namespace HardwareInterface.MPUSensor
         {
             return new Vect3Result
             {
-                X = ReadWord(0x43) * GyRate - 180,//43 44
-                Y = ReadWord(0x45) * GyRate - 180,//45 46
-                Z = ReadWord(0x47) * GyRate - 180 //47 48
+                X = ReadWord(0x43) * gyorate - gyooffset,//43 44
+                Y = ReadWord(0x45) * gyorate - gyooffset,//45 46
+                Z = ReadWord(0x47) * gyorate - gyooffset //47 48
             };
         }
 
