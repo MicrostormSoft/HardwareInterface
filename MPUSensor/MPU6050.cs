@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HardwareInterface.MPUSensor
 {
-    class MPU6050 : ISensor
+    public class MPU6050 : ISensor
     {
         public const byte ADDRESS = 0x68;
         private const byte PWR_MGMT_1 = 0x6B;

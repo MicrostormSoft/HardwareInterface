@@ -7,7 +7,7 @@
     <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/MicrostormSoft/HardwareInterface</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MicrostormSoft/HardwareInterface</RepositoryUrl>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Description>Hardware interface for some servos, motors, cameras and other sensors that I used.</Description>
   </PropertyGroup>
 
