@@ -95,21 +95,35 @@ namespace HardwareInterface.MPUSensor
 
         public Vect3Result ReadAccelerometer()
         {
+            var raw = new Vect3Result
+            {
+                X = ReadWord(0x3B),//3B 3C
+                Y = ReadWord(0x3D),//3D 3E
+                Z = ReadWord(0x3F) //3F 40
+            }
             return new Vect3Result
             {
-                X = ReadWord(0x3B) * accrate,// - accoffset,//3B 3C
-                Y = ReadWord(0x3D) * accrate,// - accoffset,//3D 3E
-                Z = ReadWord(0x3F) * accrate,// - accoffset //3F 40
+                X = raw.X * accrate - accoffset,
+                Y = raw.Y * accrate - accoffset,
+                Z = raw.Z * accrate - accoffset,
+                Raw = raw
             };
         }
 
         public Vect3Result ReadGyroscope()
         {
+            var raw = new Vect3Result
+            {
+                X = ReadWord(0x43),//43 44
+                Y = ReadWord(0x45),//45 46
+                Z = ReadWord(0x47) //47 48
+            };
             return new Vect3Result
             {
-                X = ReadWord(0x43) * gyorate,// - gyooffset,//43 44
-                Y = ReadWord(0x45) * gyorate,// - gyooffset,//45 46
-                Z = ReadWord(0x47) * gyorate,// - gyooffset //47 48
+                X = raw.X * gyorate - gyooffset,
+                Y = raw.Y * gyorate - gyooffset,
+                Z = raw.Z * gyorate - gyooffset,
+                Raw = raw
             };
         }
 

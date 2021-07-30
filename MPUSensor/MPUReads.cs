@@ -9,6 +9,7 @@ namespace HardwareInterface.MPUSensor
     public struct Vect3Result
     {
         public double X, Y, Z;
+        public Vect3Result Raw;
     }
 
     public enum AccRange
