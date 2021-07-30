@@ -95,12 +95,12 @@ namespace HardwareInterface.MPUSensor
 
         public Vect3Result ReadAccelerometer()
         {
-            var raw = new Vect3Result
+            var raw = new Vect3Raw
             {
                 X = ReadWord(0x3B),//3B 3C
                 Y = ReadWord(0x3D),//3D 3E
                 Z = ReadWord(0x3F) //3F 40
-            }
+            };
             return new Vect3Result
             {
                 X = raw.X * accrate - accoffset,
@@ -112,7 +112,7 @@ namespace HardwareInterface.MPUSensor
 
         public Vect3Result ReadGyroscope()
         {
-            var raw = new Vect3Result
+            var raw = new Vect3Raw
             {
                 X = ReadWord(0x43),//43 44
                 Y = ReadWord(0x45),//45 46
