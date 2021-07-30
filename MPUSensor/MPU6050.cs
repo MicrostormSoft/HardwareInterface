@@ -127,6 +127,36 @@ namespace HardwareInterface.MPUSensor
             };
         }
 
+        private double dist(double a,double b)
+        {
+            return Math.Sqrt((a * a) + (b * b));
+        }
+
+        private double arc2deg(double a)
+        {
+            return (a/(2*Math.PI))*360;
+        }
+
+        public Vect3Result GetRotation()
+        {
+            var acc = ReadAccelerometer();
+            var rotX = Math.Atan2(acc.X, dist(acc.Y, acc.Z));
+            var rotY = Math.Atan2(acc.Y, dist(acc.X, acc.Z));
+            var rotZ = Math.Atan2(acc.Z, dist(acc.X, acc.Y));
+            return new Vect3Result
+            {
+                X = arc2deg(rotX),
+                Y = arc2deg(rotY),
+                Z = arc2deg(rotZ),
+                Raw = new Vect3Raw
+                {
+                    X = rotX,
+                    Y = rotY,
+                    Z = rotZ
+                }
+            };
+        }
+
         private byte[] ReadBytes(byte regAddr, int length)
         {
             byte[] values = new byte[length];
