@@ -13,7 +13,7 @@ namespace HardwareInterface.MPUSensor
     }
     public struct Vect3Raw
     {
-        public ushort X, Y, Z;
+        public short X, Y, Z;
     }
 
     public enum AccRange

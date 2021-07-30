@@ -103,9 +103,9 @@ namespace HardwareInterface.MPUSensor
             };
             return new Vect3Result
             {
-                X = raw.X * accrate - accoffset,
-                Y = raw.Y * accrate - accoffset,
-                Z = raw.Z * accrate - accoffset,
+                X = raw.X * accrate,
+                Y = raw.Y * accrate,
+                Z = raw.Z * accrate,
                 Raw = raw
             };
         }
@@ -120,9 +120,9 @@ namespace HardwareInterface.MPUSensor
             };
             return new Vect3Result
             {
-                X = raw.X * gyorate - gyooffset,
-                Y = raw.Y * gyorate - gyooffset,
-                Z = raw.Z * gyorate - gyooffset,
+                X = raw.X * gyorate,
+                Y = raw.Y * gyorate,
+                Z = raw.Z * gyorate,
                 Raw = raw
             };
         }
@@ -136,10 +136,10 @@ namespace HardwareInterface.MPUSensor
             return values;
         }
 
-        private ushort ReadWord(byte address)
+        private short ReadWord(byte address)
         {
             byte[] buffer = ReadBytes(address, 2);
-            return (ushort)(((int)buffer[0] << 8) | (int)buffer[1]);
+            return (short)((buffer[0] << 8) | buffer[1]);
         }
 
         private void WriteByte(byte regAddr, byte data)
